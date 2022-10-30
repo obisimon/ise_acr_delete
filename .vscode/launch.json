@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Sponsor-List",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/ise.py",
+            "args" : ["sponsor-list"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Delete Sponsor Accounts",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/ise.py",
+            "args" : ["delete-sponsor-accounts"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: UI-List",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/ise.py",
+            "args" : ["ui-list", "-f", "UserType=CONTEXT_EXTACT_MATCH_GuestUser","-c","userName,PortalUserGuestType,PortalUserGuestSponsor"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}

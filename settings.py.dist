@@ -1,0 +1,19 @@
+import credentials
+
+ISE_ERS_URL = ""
+ISE_ERS_USERNAME = credentials.ISE_ERS_USERNAME
+ISE_ERS_PASSWORD = credentials.ISE_ERS_PASSWORD
+
+ISE_UI_URL = ""
+ISE_UI_USERNAME = credentials.ISE_UI_USERNAME
+ISE_UI_PASSWORD = credentials.ISE_UI_PASSWORD
+
+ISE_SSL_VERIFY = True
+
+# PROXIES = {
+#     "http": "",
+#     "https": "",
+# }
+
+PROXIES = {}
+
