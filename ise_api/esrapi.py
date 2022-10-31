@@ -42,7 +42,7 @@ class IseAPI:
     def _get(self, url: str) -> dict[str, Any]:
         url = urljoin(self.base_url, url)
 
-        print(f"get: {url}")
+        # print(f"get: {url}")
 
         response = self.session.request(
             "GET",

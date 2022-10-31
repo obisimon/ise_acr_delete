@@ -4,16 +4,19 @@ ISE_ERS_URL = ""
 ISE_ERS_USERNAME = credentials.ISE_ERS_USERNAME
 ISE_ERS_PASSWORD = credentials.ISE_ERS_PASSWORD
 
-ISE_UI_URL = ""
+ISE_SPONSOR_USERNAME = credentials.ISE_SPONSOR_USERNAME
+ISE_SPONSOR_PASSWORD = credentials.ISE_SPONSOR_PASSWORD
+
+ISE_UI_URL = "" # username for normal login (not required on all tasks)
 ISE_UI_USERNAME = credentials.ISE_UI_USERNAME
 ISE_UI_PASSWORD = credentials.ISE_UI_PASSWORD
+ISE_UI_LOGINTYPE = "" # string of login type at the frontend (not required on all tasks)
 
 ISE_SSL_VERIFY = True
+
+PROXIES = {}
 
 # PROXIES = {
 #     "http": "",
 #     "https": "",
 # }
-
-PROXIES = {}
-

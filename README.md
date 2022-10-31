@@ -1,19 +1,33 @@
-# ise_acr_delete
+# Delete Sponsor Portal users at ISE (and probably other ISE tasks)
+
+Scripts to delete ISE Sponsor Portal Users
 
 ## Install
-use poetry:
+using python 3.10, checkout [pyenv](https://github.com/pyenv/pyenv)
+
+### use poetry:
 ```
 poetry install
 poetry shell
 ```
-plain:
+### plain:
 ```
 pip install -r /path/to/requirements.txt
 ```
 
+### settings and credentials
+
+```
+cp settings.py.dist settings.py
+cp credentials.py.dist credentials.py
+```
+
+adjust the settings and credentials
+
+
 ## Usage
 ```
-> python ./ise.py  delete-sponsor-accounts --help
+python ./ise.py  delete-sponsor-accounts --help
 Usage: ise.py delete-sponsor-accounts [OPTIONS]
 
   Delete Sponsor Accounts
