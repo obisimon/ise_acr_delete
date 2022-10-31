@@ -9,16 +9,6 @@ from tabulate import tabulate
 import jmespath
 from csv import DictWriter
 
-# http_session = Session()
-# http_session.proxies.update(
-#     {
-#         "http": "http://127.0.0.1:3128",
-#         "https": "http://127.0.0.1:3128",
-#     }
-# )
-# http_session.verify = False
-# netbox.http_session = http_session
-
 
 @click.group("")
 def cli() -> None:
@@ -156,6 +146,7 @@ def delete_sponsor_accounts(filter, regex_username, regex_email, confirm, endpoi
     if filter:
         endpoint = urljoin(endpoint, f"?filter={filter}&size=100")
 
+    click.echo("load sponsor accounts")
     users = sponsorapi.getall(endpoint)
 
     if not confirm:
@@ -166,8 +157,8 @@ def delete_sponsor_accounts(filter, regex_username, regex_email, confirm, endpoi
 
     for user in users:
         has_endpoints = False
-        click.echo("---------")
-        click.echo(f"process user: {jmespath.search('name', user)}")
+        # click.echo("---------")
+        # click.echo(f"process user: {jmespath.search('name', user)}")
         if regex_username and not re.search(
             regex_username, str(jmespath.search("name", user))
         ):
@@ -179,6 +170,9 @@ def delete_sponsor_accounts(filter, regex_username, regex_email, confirm, endpoi
                 str(jmespath.search("GuestUser.guestInfo.emailAddress", detail)),
             ):
                 continue
+
+        click.echo("---------")
+        click.echo(f"process user: {jmespath.search('name', user)}")
         
         for endpoint in ersapi.get(
             "endpoint?filter=portalUser.EQ."
@@ -186,12 +180,12 @@ def delete_sponsor_accounts(filter, regex_username, regex_email, confirm, endpoi
             + "&page=1&size=100"
         ):
             has_endpoints = True
-            click.echo("Endpoint: " + json.dumps(endpoint))
+            # click.echo("Endpoint: " + json.dumps(endpoint))
             if confirm and delete_endpoints:
                 ersapi._delete("endpoint/" + jmespath.search("id", endpoint))
-                click.echo(f"delete related endpoint {endpoint}")
+                click.echo(f"delete related endpoint {jmespath.search('name', endpoint)} {jmespath.search('id', endpoint)}")
             else:
-                click.echo(f"would delete related endpoint {endpoint}")
+                click.echo(f"would delete related endpoint {jmespath.search('name', endpoint)} {jmespath.search('id', endpoint)}")
         
 
         if has_endpoints and delete_endpoints:
