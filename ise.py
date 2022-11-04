@@ -122,7 +122,10 @@ def ui_list(output, filter, columns):
     is_flag=True,
     help="Include endpoints of the sponsor accounts",
 )
-def delete_sponsor_accounts(filter, regex_username, regex_email, confirm, endpoints):
+@click.option(
+    "--limit", type=int, help="limit amount of accounts to be deleted", default=0
+)
+def delete_sponsor_accounts(filter, regex_username, regex_email, confirm, endpoints, limit):
     """Delete Sponsor Accounts"""
     delete_endpoints = endpoints
 
@@ -188,7 +191,7 @@ def delete_sponsor_accounts(filter, regex_username, regex_email, confirm, endpoi
                 click.echo(f"would delete related endpoint {jmespath.search('name', endpoint)} {jmespath.search('id', endpoint)}")
         
 
-        if has_endpoints and delete_endpoints:
+        if confirm and has_endpoints and delete_endpoints:
             click.echo(
                 f"delete guest user {str(jmespath.search('name', user))} (with endpoints)"
             )
@@ -206,7 +209,11 @@ def delete_sponsor_accounts(filter, regex_username, regex_email, confirm, endpoi
             click.echo(
                 f"would delete guest user {str(jmespath.search('name', user))}"
             )
+
         count += 1
+
+        if limit and count >= limit:
+            break
 
     click.echo(f"total {count} accounts deleted")
 
