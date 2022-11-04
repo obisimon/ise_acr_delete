@@ -64,14 +64,14 @@ class IseAPI:
     def getall(self, url: str) -> list[dict[str, Any]]:
         resources = []
         url = urlparse(url)
-        query = dict(parse_qsl(url.query))
-        query.update(
-            {
-                "size": query.get("size", str(DEFAULT_PAGE_SIZE)),
-                "page": query.get("page", "1"),
-            }
-        )
-        url = url._replace(query=urlencode(query))
+        query_list = parse_qsl(url.query)
+        query_dict = dict(query_list)
+        if not query_dict.get("size"):
+            query_list.append(("size", str(DEFAULT_PAGE_SIZE)))
+        if not query_dict.get("page"):
+            query_list.append(("page", "1"))
+        
+        url = url._replace(query=urlencode(query_list))
         response = self._get(url.geturl())
         while response.get("SearchResult"):
             resources += response["SearchResult"].get("resources", [])

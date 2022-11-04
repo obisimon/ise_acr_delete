@@ -105,6 +105,7 @@ def ui_list(output, filter, columns):
     "-f",
     type=str,
     help="ISE Filter options to select which sponsor accounts should be deleted",
+    multiple=True,
 )
 @click.option(
     "--regex-username", type=str, help="Regular expression to match the usernames"
@@ -146,8 +147,10 @@ def delete_sponsor_accounts(filter, regex_username, regex_email, confirm, endpoi
     )
 
     endpoint = "guestuser"
+
     if filter:
-        endpoint = urljoin(endpoint, f"?filter={filter}&size=100")
+        filter = "&filter=".join(filter)
+        endpoint = urljoin(endpoint, f"?{filter}&size=100")
 
     click.echo("load sponsor accounts")
     users = sponsorapi.getall(endpoint)
