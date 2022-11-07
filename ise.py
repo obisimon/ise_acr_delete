@@ -150,7 +150,7 @@ def delete_sponsor_accounts(filter, regex_username, regex_email, confirm, endpoi
 
     if filter:
         filter = "&filter=".join(filter)
-        endpoint = urljoin(endpoint, f"?{filter}&size=100")
+        endpoint = urljoin(endpoint, f"?filter={filter}&size=100")
 
     click.echo("load sponsor accounts")
     users = sponsorapi.getall(endpoint)
